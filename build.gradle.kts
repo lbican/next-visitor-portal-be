@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.3.2"
     id("io.spring.dependency-management") version "1.1.6"
     kotlin("jvm")
+    id("org.flywaydb.flyway") version ("10.17.2")
 }
 
 group = "com.portal"
@@ -43,6 +44,12 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
     implementation(kotlin("stdlib-jdk8"))
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/postgres"
+    user = System.getenv("POSTGRES_USERNAME") ?: "postgres"
+    password = System.getenv("POSTGRES_PASSWORD") ?: "mysecretpassword"
 }
 
 tasks.withType<Test> {

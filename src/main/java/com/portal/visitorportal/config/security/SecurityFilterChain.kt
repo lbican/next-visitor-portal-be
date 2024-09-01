@@ -1,4 +1,4 @@
-package com.portal.visitorportal.security
+package com.portal.visitorportal.config.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
