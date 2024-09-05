@@ -3,7 +3,7 @@ package com.portal.visitorportal.model.user
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "user_profiles")
+@Table(schema = "app_users", name = "user_profiles")
 data class UserProfile(
 
     @Id

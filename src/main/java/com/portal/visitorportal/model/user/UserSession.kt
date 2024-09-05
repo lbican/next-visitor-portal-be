@@ -6,7 +6,7 @@ import java.sql.Timestamp
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "user_sessions")
+@Table(schema = "app_users", name = "user_sessions")
 data class UserSession(
 
     @Id

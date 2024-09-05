@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import lombok.AllArgsConstructor
 
 @Entity
-@Table(name = "roles")
+@Table(schema = "app_users", name = "roles")
 @AllArgsConstructor
 data class Role(
 

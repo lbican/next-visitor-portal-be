@@ -1,15 +1,12 @@
 package com.portal.visitorportal.model.user
 
 import jakarta.persistence.*
-import lombok.AllArgsConstructor
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
-import java.sql.Timestamp
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "users")
-@AllArgsConstructor
+@Table(schema= "app_users", name = "users")
 data class User(
 
     @Id
@@ -26,7 +23,16 @@ data class User(
     val createdAt: LocalDateTime,
 
     @LastModifiedDate
-    val updatedAt: LocalDateTime
+    val updatedAt: LocalDateTime,
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "user_roles",
+        schema = "app_users",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "role_id")]
+    )
+    val roles: List<Role>
 ) {
     constructor() : this(
         id = 0,
@@ -36,6 +42,38 @@ data class User(
         firstName = "",
         lastName = "",
         createdAt = LocalDateTime.now(),
-        updatedAt = LocalDateTime.now()
+        updatedAt = LocalDateTime.now(),
+        roles = emptyList()
     )
+
+    constructor(
+        username: String,
+        email: String,
+        passwordHash: String,
+        firstName: String,
+        lastName: String
+    ) : this(
+        id = 0,
+        username = username,
+        email = email,
+        passwordHash = passwordHash,
+        firstName = firstName,
+        lastName = lastName,
+        createdAt = LocalDateTime.now(),
+        updatedAt = LocalDateTime.now(),
+        roles = emptyList()
+    )
+
+    fun toDto(): UserDTO {
+        return UserDTO(
+            id = id,
+            username = username,
+            email = email,
+            firstName = firstName,
+            lastName = lastName,
+            updatedAt = updatedAt,
+            createdAt = createdAt,
+            roles = roles.map { it.roleName }
+        )
+    }
 }
