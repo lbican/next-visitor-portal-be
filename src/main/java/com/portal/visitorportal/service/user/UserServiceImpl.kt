@@ -6,12 +6,13 @@ import com.portal.visitorportal.model.user.dto.ApplicationUserDTO
 import com.portal.visitorportal.repository.user.UserRepository
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class UserServiceImpl(
     private val userRepository: UserRepository,
-    private val bCryptPasswordEncoder: BCryptPasswordEncoder
+    private val passwordEncoder: PasswordEncoder
 ): UserService {
     override fun getUserByUsername(username: String): ApplicationUserDTO {
         return userRepository.getUserByUsername(username)?.toDto() ?: throw UsernameNotFoundException("User not found")
@@ -24,7 +25,7 @@ class UserServiceImpl(
     }
 
     private fun mapStudentCommandToUser(userSignUpCommandDTO: UserSignUpCommandDTO): ApplicationUser {
-        val passwordHash = bCryptPasswordEncoder.encode(userSignUpCommandDTO.password)
+        val passwordHash = passwordEncoder.encode(userSignUpCommandDTO.password)
         val applicationUser = ApplicationUser(
             email = userSignUpCommandDTO.email,
             username = userSignUpCommandDTO.username,

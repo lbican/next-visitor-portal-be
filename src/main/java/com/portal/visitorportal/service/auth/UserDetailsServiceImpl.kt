@@ -1,4 +1,4 @@
-package com.portal.visitorportal.service.user
+package com.portal.visitorportal.service.auth
 
 import com.portal.visitorportal.model.user.ApplicationUser
 import com.portal.visitorportal.repository.user.UserRepository
@@ -9,14 +9,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
-class UserAuthDetailsService(
+class UserDetailsServiceImpl(
     private val userRepository: UserRepository
 ): UserDetailsService {
     override fun loadUserByUsername(username: String?): UserDetails {
         val applicationUser: ApplicationUser = userRepository.getUserByUsername(username) ?: throw UsernameNotFoundException("User with $username not found")
 
-        return User
-            .withUsername(applicationUser.username)
+        return User.builder()
+            .username(applicationUser.username)
             .password(applicationUser.password)
             .roles(*applicationUser.roles.map { it.roleName }.toTypedArray())
             .build()
