@@ -1,9 +1,10 @@
 package com.portal.visitorportal.service.user
 
-import com.portal.visitorportal.model.user.User
-import com.portal.visitorportal.model.user.UserCommand
-import com.portal.visitorportal.model.user.UserDTO
+import com.portal.visitorportal.model.user.ApplicationUser
+import com.portal.visitorportal.model.user.dto.UserSignUpCommandDTO
+import com.portal.visitorportal.model.user.dto.ApplicationUserDTO
 import com.portal.visitorportal.repository.user.UserRepository
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -12,26 +13,26 @@ class UserServiceImpl(
     private val userRepository: UserRepository,
     private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ): UserService {
-    override fun getUserByUsername(username: String): UserDTO {
-        return userRepository.getUserByUsername(username).toDto()
+    override fun getUserByUsername(username: String): ApplicationUserDTO {
+        return userRepository.getUserByUsername(username)?.toDto() ?: throw UsernameNotFoundException("User not found")
     }
 
-    override fun registerUser(userCommand: UserCommand): UserDTO {
-        val user = mapStudentCommandToUser(userCommand)
+    override fun registerUser(userSignUpCommandDTO: UserSignUpCommandDTO): ApplicationUserDTO {
+        val user = mapStudentCommandToUser(userSignUpCommandDTO)
 
         return userRepository.save(user).toDto()
     }
 
-    private fun mapStudentCommandToUser(userCommand: UserCommand): User {
-        val passwordHash = bCryptPasswordEncoder.encode(userCommand.password)
-        val user = User(
-            email = userCommand.email,
-            username = userCommand.username,
+    private fun mapStudentCommandToUser(userSignUpCommandDTO: UserSignUpCommandDTO): ApplicationUser {
+        val passwordHash = bCryptPasswordEncoder.encode(userSignUpCommandDTO.password)
+        val applicationUser = ApplicationUser(
+            email = userSignUpCommandDTO.email,
+            username = userSignUpCommandDTO.username,
             passwordHash = passwordHash,
-            firstName = userCommand.firstName,
-            lastName = userCommand.lastName
+            firstName = userSignUpCommandDTO.firstName,
+            lastName = userSignUpCommandDTO.lastName
         )
 
-        return user;
+        return applicationUser;
     }
 }

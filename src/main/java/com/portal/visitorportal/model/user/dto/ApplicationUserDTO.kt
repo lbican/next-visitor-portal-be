@@ -1,8 +1,8 @@
-package com.portal.visitorportal.model.user
+package com.portal.visitorportal.model.user.dto
 
 import java.time.LocalDateTime
 
-data class UserDTO(
+data class ApplicationUserDTO(
     val id: Long,
     val username: String,
     val email: String,

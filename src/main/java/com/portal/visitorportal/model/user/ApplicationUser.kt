@@ -1,5 +1,6 @@
 package com.portal.visitorportal.model.user
 
+import com.portal.visitorportal.model.user.dto.ApplicationUserDTO
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -7,7 +8,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(schema= "app_users", name = "users")
-data class User(
+data class ApplicationUser(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +16,9 @@ data class User(
 
     val username: String,
     val email: String,
-    val passwordHash: String,
+    @Column(name = "password_hash")
+    val password: String,
+
     val firstName: String,
     val lastName: String,
 
@@ -38,7 +41,7 @@ data class User(
         id = 0,
         username = "",
         email = "",
-        passwordHash = "",
+        password = "",
         firstName = "",
         lastName = "",
         createdAt = LocalDateTime.now(),
@@ -56,7 +59,7 @@ data class User(
         id = 0,
         username = username,
         email = email,
-        passwordHash = passwordHash,
+        password = passwordHash,
         firstName = firstName,
         lastName = lastName,
         createdAt = LocalDateTime.now(),
@@ -64,8 +67,8 @@ data class User(
         roles = emptyList()
     )
 
-    fun toDto(): UserDTO {
-        return UserDTO(
+    fun toDto(): ApplicationUserDTO {
+        return ApplicationUserDTO(
             id = id,
             username = username,
             email = email,

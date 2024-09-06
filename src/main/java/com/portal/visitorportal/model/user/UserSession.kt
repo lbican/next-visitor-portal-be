@@ -2,7 +2,6 @@ package com.portal.visitorportal.model.user
 
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
-import java.sql.Timestamp
 import java.time.LocalDateTime
 
 @Entity
@@ -15,7 +14,7 @@ data class UserSession(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    val user: User,
+    val applicationUser: ApplicationUser,
 
     val sessionToken: String,
 
@@ -26,7 +25,7 @@ data class UserSession(
 ) {
     constructor() : this(
         id = 0,
-        user = User(),
+        applicationUser = ApplicationUser(),
         sessionToken = "",
         createdAt = LocalDateTime.now(),
         expiresAt = LocalDateTime.now(),

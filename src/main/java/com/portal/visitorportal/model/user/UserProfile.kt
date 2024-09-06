@@ -10,7 +10,7 @@ data class UserProfile(
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "user_id")
-    val user: User,
+    val applicationUser: ApplicationUser,
     val bio: String,
     val profilePicture: String,
     val website: String,
@@ -18,7 +18,7 @@ data class UserProfile(
     val phoneNumber: String
 ) {
     constructor() : this(
-        user = User(),
+        applicationUser = ApplicationUser(),
         bio = "",
         profilePicture = "",
         website = "",

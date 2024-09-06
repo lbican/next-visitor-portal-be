@@ -1,7 +1,7 @@
 package com.portal.visitorportal.controllers.user
 
-import com.portal.visitorportal.model.user.UserCommand
-import com.portal.visitorportal.model.user.UserDTO
+import com.portal.visitorportal.model.user.dto.UserSignUpCommandDTO
+import com.portal.visitorportal.model.user.dto.ApplicationUserDTO
 import com.portal.visitorportal.service.user.UserService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/public")
 class UserController(
     private val userService: UserService
 ) {
 
-    @GetMapping("/user/{username}")
-    fun getUserByUsername(@PathVariable username: String): UserDTO {
+    @GetMapping("/{username}")
+    fun getUserByUsername(@PathVariable username: String): ApplicationUserDTO {
         return userService.getUserByUsername(username)
     }
 
     @PostMapping("/register")
-    fun registerUser(@Valid @RequestBody userCommand: UserCommand): UserDTO {
-        return userService.registerUser(userCommand)
+    fun registerUser(@Valid @RequestBody userSignUpCommandDTO: UserSignUpCommandDTO): ApplicationUserDTO {
+        return userService.registerUser(userSignUpCommandDTO)
     }
 }

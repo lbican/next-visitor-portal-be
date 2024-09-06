@@ -1,10 +1,10 @@
-package com.portal.visitorportal.model.user
+package com.portal.visitorportal.model.user.dto
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 
-data class UserCommand(
+data class UserSignUpCommandDTO(
     @field:NotBlank
     val username: String,
 
