@@ -24,14 +24,13 @@ open class SecurityConfiguration(
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/api/auth", "/api/auth/refresh", "/error")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/user")
+                    // Open public endpoints
+                    .requestMatchers("/api/auth/**", "/error", "/api/public/**")
                     .permitAll()
                     .requestMatchers("/api/user/**")
                     .hasRole("ADMIN")
                     .anyRequest()
-                    .fullyAuthenticated()
+                    .authenticated()
             }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -42,3 +41,4 @@ open class SecurityConfiguration(
         return http.build()
     }
 }
+

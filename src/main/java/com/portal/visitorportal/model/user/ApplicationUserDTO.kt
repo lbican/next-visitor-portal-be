@@ -1,4 +1,4 @@
-package com.portal.visitorportal.model.user.dto
+package com.portal.visitorportal.model.user
 
 import java.time.LocalDateTime
 

@@ -1,11 +1,10 @@
 package com.portal.visitorportal.service.user
 
 import com.portal.visitorportal.model.user.ApplicationUser
-import com.portal.visitorportal.model.user.dto.UserSignUpCommandDTO
-import com.portal.visitorportal.model.user.dto.ApplicationUserDTO
+import com.portal.visitorportal.model.user.RegisterCommandDTO
+import com.portal.visitorportal.model.user.ApplicationUserDTO
 import com.portal.visitorportal.repository.user.UserRepository
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -18,20 +17,20 @@ class UserServiceImpl(
         return userRepository.getUserByUsername(username)?.toDto() ?: throw UsernameNotFoundException("User not found")
     }
 
-    override fun registerUser(userSignUpCommandDTO: UserSignUpCommandDTO): ApplicationUserDTO {
-        val user = mapStudentCommandToUser(userSignUpCommandDTO)
+    override fun registerUser(registerCommandDTO: RegisterCommandDTO): ApplicationUserDTO {
+        val user = mapStudentCommandToUser(registerCommandDTO)
 
         return userRepository.save(user).toDto()
     }
 
-    private fun mapStudentCommandToUser(userSignUpCommandDTO: UserSignUpCommandDTO): ApplicationUser {
-        val passwordHash = passwordEncoder.encode(userSignUpCommandDTO.password)
+    private fun mapStudentCommandToUser(registerCommandDTO: RegisterCommandDTO): ApplicationUser {
+        val passwordHash = passwordEncoder.encode(registerCommandDTO.password)
         val applicationUser = ApplicationUser(
-            email = userSignUpCommandDTO.email,
-            username = userSignUpCommandDTO.username,
+            email = registerCommandDTO.email,
+            username = registerCommandDTO.username,
             passwordHash = passwordHash,
-            firstName = userSignUpCommandDTO.firstName,
-            lastName = userSignUpCommandDTO.lastName
+            firstName = registerCommandDTO.firstName,
+            lastName = registerCommandDTO.lastName
         )
 
         return applicationUser;

@@ -1,9 +1,9 @@
 package com.portal.visitorportal.controllers.auth
 
-import com.portal.visitorportal.model.user.dto.AuthRequest
-import com.portal.visitorportal.model.user.dto.AuthResponse
-import com.portal.visitorportal.model.user.dto.JwtTokenRefreshRequest
-import com.portal.visitorportal.model.user.dto.JwtTokenResponse
+import com.portal.visitorportal.model.auth.AuthRequestDTO
+import com.portal.visitorportal.model.auth.AuthResponseDTO
+import com.portal.visitorportal.model.auth.JwtTokenRefreshRequestDTO
+import com.portal.visitorportal.model.auth.JwtTokenResponseDTO
 import com.portal.visitorportal.service.auth.AuthService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -18,21 +18,21 @@ import org.springframework.web.server.ResponseStatusException
 class AuthController(
     private val authService: AuthService
 ) {
-    @PostMapping
-    fun authenticate(@Valid @RequestBody authRequest: AuthRequest): AuthResponse {
-        return authService.authenticate(authRequest)
+    @PostMapping("/authenticate")
+    fun authenticate(@Valid @RequestBody authRequestDTO: AuthRequestDTO): AuthResponseDTO {
+        return authService.authenticate(authRequestDTO)
     }
 
     @PostMapping("/refresh")
     fun refreshAccessToken(
-        @RequestBody request: JwtTokenRefreshRequest
-    ): JwtTokenResponse =
+        @RequestBody request: JwtTokenRefreshRequestDTO
+    ): JwtTokenResponseDTO =
         authService.refreshAccessToken(request.token)
             ?.mapToTokenResponse()
             ?: throw ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid refresh token.")
 
-    private fun String.mapToTokenResponse(): JwtTokenResponse {
-        return JwtTokenResponse(
+    private fun String.mapToTokenResponse(): JwtTokenResponseDTO {
+        return JwtTokenResponseDTO(
             token = this
         )
     }

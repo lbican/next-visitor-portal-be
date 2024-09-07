@@ -1,6 +1,5 @@
 package com.portal.visitorportal.model.user
 
-import com.portal.visitorportal.model.user.dto.ApplicationUserDTO
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -28,7 +27,7 @@ data class ApplicationUser(
     @LastModifiedDate
     val updatedAt: LocalDateTime,
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",
         schema = "app_users",

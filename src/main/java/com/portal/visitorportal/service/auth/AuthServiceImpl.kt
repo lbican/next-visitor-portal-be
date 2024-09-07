@@ -1,8 +1,8 @@
 package com.portal.visitorportal.service.auth
 
-import com.portal.visitorportal.repository.user.JwtTokenRefreshRepository
-import com.portal.visitorportal.model.user.dto.AuthResponse
-import com.portal.visitorportal.model.user.dto.AuthRequest
+import com.portal.visitorportal.repository.auth.JwtTokenRefreshRepository
+import com.portal.visitorportal.model.auth.AuthResponseDTO
+import com.portal.visitorportal.model.auth.AuthRequestDTO
 import com.portal.visitorportal.security.jwt.JwtProperties
 import com.portal.visitorportal.security.jwt.JwtTokenService
 import org.springframework.security.authentication.AuthenticationManager
@@ -20,18 +20,18 @@ class AuthServiceImpl(
     private val jwtProperties: JwtProperties,
     private val refreshTokenRepository: JwtTokenRefreshRepository
 ): AuthService {
-    override fun authenticate(authRequest: AuthRequest): AuthResponse {
+    override fun authenticate(authRequestDTO: AuthRequestDTO): AuthResponseDTO {
         authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
-                authRequest.username,
-                authRequest.password
+                authRequestDTO.username,
+                authRequestDTO.password
             )
         )
-        val user = userDetailsService.loadUserByUsername(authRequest.username)
+        val user = userDetailsService.loadUserByUsername(authRequestDTO.username)
         val accessToken = createAccessToken(user)
         val refreshToken = createRefreshToken(user)
 
-        return AuthResponse(
+        return AuthResponseDTO(
             accessToken = accessToken,
             refreshToken = refreshToken
         )
