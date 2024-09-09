@@ -31,6 +31,8 @@ class AuthServiceImpl(
         val accessToken = createAccessToken(user)
         val refreshToken = createRefreshToken(user)
 
+        refreshTokenRepository.save(refreshToken, user)
+
         return AuthResponseDTO(
             accessToken = accessToken,
             refreshToken = refreshToken

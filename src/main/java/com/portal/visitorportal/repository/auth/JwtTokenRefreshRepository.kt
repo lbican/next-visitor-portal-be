@@ -8,11 +8,11 @@ class JwtTokenRefreshRepository {
 
     private val tokens = mutableMapOf<String, UserDetails>()
 
-    fun findUserDetailsByToken(token: String) : UserDetails? =
-        tokens[token]
+    fun findUserDetailsByToken(token: String) : UserDetails? {
+        return tokens[token];
+    }
 
     fun save(token: String, userDetails: UserDetails) {
         tokens[token] = userDetails
     }
-
 }
