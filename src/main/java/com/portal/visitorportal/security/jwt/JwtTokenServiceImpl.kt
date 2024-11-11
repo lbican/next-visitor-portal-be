@@ -3,23 +3,19 @@ package com.portal.visitorportal.security.jwt
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
+import java.util.*
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
-class JwtTokenServiceImpl(
-    jwtProperties: JwtProperties
-): JwtTokenService {
+class JwtTokenServiceImpl(jwtProperties: JwtProperties) : JwtTokenService {
 
-    private val secretKey = Keys.hmacShaKeyFor(
-        jwtProperties.key.toByteArray()
-    )
+    private val secretKey = Keys.hmacShaKeyFor(jwtProperties.key.toByteArray())
 
     override fun generate(
         userDetails: UserDetails,
         expirationDate: Date,
-        additionalClaims: Map<String, Any>
+        additionalClaims: Map<String, Any>,
     ): String =
         Jwts.builder()
             .claims()
@@ -47,9 +43,7 @@ class JwtTokenServiceImpl(
     }
 
     private fun getAllClaims(token: String): Claims {
-        val parser = Jwts.parser()
-            .verifyWith(secretKey)
-            .build()
+        val parser = Jwts.parser().verifyWith(secretKey).build()
 
         return parser.parseSignedClaims(token).payload
     }

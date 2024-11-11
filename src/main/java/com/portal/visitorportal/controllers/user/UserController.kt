@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/public")
-class UserController(
-    private val userService: UserService
-) {
+class UserController(private val userService: UserService) {
 
     @GetMapping("/{username}")
     fun getUserByUsername(@PathVariable username: String): ApplicationUserDTO {
@@ -18,7 +16,9 @@ class UserController(
     }
 
     @PostMapping("/register")
-    fun registerUser(@Valid @RequestBody registerCommandDTO: RegisterCommandDTO): ApplicationUserDTO {
+    fun registerUser(
+        @Valid @RequestBody registerCommandDTO: RegisterCommandDTO
+    ): ApplicationUserDTO {
         return userService.registerUser(registerCommandDTO)
     }
 }

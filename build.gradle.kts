@@ -4,7 +4,10 @@ plugins {
     id("io.spring.dependency-management") version "1.1.6"
     kotlin("jvm")
     id("org.flywaydb.flyway") version ("10.17.2")
+    id("com.ncorti.ktfmt.gradle") version "0.21.0"
 }
+
+ktfmt { kotlinLangStyle() }
 
 group = "com.portal"
 version = "0.0.1-SNAPSHOT"

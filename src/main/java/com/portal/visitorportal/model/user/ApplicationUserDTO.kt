@@ -10,5 +10,5 @@ data class ApplicationUserDTO(
     val lastName: String,
     val updatedAt: LocalDateTime,
     val createdAt: LocalDateTime,
-    val roles: List<String>
+    val roles: List<String>,
 )

@@ -1,6 +1,5 @@
 package com.portal.visitorportal.security.jwt
 
-import com.portal.visitorportal.service.auth.UserDetailsServiceImpl
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -15,13 +14,13 @@ import org.springframework.web.filter.OncePerRequestFilter
 @Component
 class JwtAuthenticationFilter(
     private val userDetailsService: UserDetailsService,
-    private val jwtTokenService: JwtTokenService
+    private val jwtTokenService: JwtTokenService,
 ) : OncePerRequestFilter() {
 
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain
+        filterChain: FilterChain,
     ) {
         val authHeader = request.getHeader("Authorization")
 
@@ -49,7 +48,8 @@ class JwtAuthenticationFilter(
     private fun String.extractToken() = this.substringAfter("Bearer ")
 
     private fun setAuthentication(userDetails: UserDetails, request: HttpServletRequest) {
-        val authentication = UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
+        val authentication =
+            UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
         authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
         SecurityContextHolder.getContext().authentication = authentication
     }

@@ -7,15 +7,8 @@ import lombok.AllArgsConstructor
 @Table(schema = "app_users", name = "roles")
 @AllArgsConstructor
 data class Role(
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-
-    val roleName: String
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long,
+    val roleName: String,
 ) {
-    constructor() : this(
-        id = 0,
-        roleName = ""
-    )
+    constructor() : this(id = 0, roleName = "")
 }

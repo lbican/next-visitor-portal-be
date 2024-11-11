@@ -13,7 +13,9 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseBody
-    fun handleValidationExceptions(ex: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
+    fun handleValidationExceptions(
+        ex: MethodArgumentNotValidException
+    ): ResponseEntity<ErrorResponse> {
         val errors = mutableMapOf<String, String>()
 
         ex.bindingResult.allErrors.forEach { error ->

@@ -5,7 +5,6 @@ import jakarta.persistence.*
 @Entity
 @Table(schema = "app_users", name = "user_profiles")
 data class UserProfile(
-
     @Id
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
@@ -15,14 +14,15 @@ data class UserProfile(
     val profilePicture: String,
     val website: String,
     val location: String,
-    val phoneNumber: String
+    val phoneNumber: String,
 ) {
-    constructor() : this(
-        applicationUser = ApplicationUser(),
-        bio = "",
-        profilePicture = "",
-        website = "",
-        location = "",
-        phoneNumber = ""
-    )
+    constructor() :
+        this(
+            applicationUser = ApplicationUser(),
+            bio = "",
+            profilePicture = "",
+            website = "",
+            location = "",
+            phoneNumber = "",
+        )
 }

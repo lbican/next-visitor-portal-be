@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service
 @Service
 open class UserServiceImpl(
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder
-): UserService {
+    private val passwordEncoder: PasswordEncoder,
+) : UserService {
     override fun getUserByUsername(username: String): ApplicationUserDTO {
-        return userRepository.getUserByUsername(username)?.toDto() ?: throw UsernameNotFoundException("User not found")
+        return userRepository.getUserByUsername(username)?.toDto()
+            ?: throw UsernameNotFoundException("User not found")
     }
 
     override fun registerUser(registerCommandDTO: RegisterCommandDTO): ApplicationUserDTO {
@@ -25,13 +26,14 @@ open class UserServiceImpl(
 
     private fun mapStudentCommandToUser(registerCommandDTO: RegisterCommandDTO): ApplicationUser {
         val passwordHash = passwordEncoder.encode(registerCommandDTO.password)
-        val applicationUser = ApplicationUser(
-            email = registerCommandDTO.email,
-            username = registerCommandDTO.username,
-            passwordHash = passwordHash,
-            firstName = registerCommandDTO.firstName,
-            lastName = registerCommandDTO.lastName
-        )
+        val applicationUser =
+            ApplicationUser(
+                email = registerCommandDTO.email,
+                username = registerCommandDTO.username,
+                passwordHash = passwordHash,
+                firstName = registerCommandDTO.firstName,
+                lastName = registerCommandDTO.lastName,
+            )
 
         return applicationUser
     }

@@ -22,16 +22,14 @@ open class SecurityAuthConfiguration {
     open fun userDetailsService(userRepository: UserRepository): UserDetailsService =
         UserDetailsServiceImpl(userRepository)
 
-    @Bean
-    open fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
+    @Bean open fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
     open fun authenticationProvider(userRepository: UserRepository): AuthenticationProvider =
-        DaoAuthenticationProvider()
-            .also {
-                it.setUserDetailsService(userDetailsService(userRepository))
-                it.setPasswordEncoder(passwordEncoder())
-            }
+        DaoAuthenticationProvider().also {
+            it.setUserDetailsService(userDetailsService(userRepository))
+            it.setPasswordEncoder(passwordEncoder())
+        }
 
     @Bean
     open fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager =
