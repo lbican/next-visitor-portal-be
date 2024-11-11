@@ -1,15 +1,15 @@
 package com.portal.visitorportal.service.user
 
 import com.portal.visitorportal.model.user.ApplicationUser
-import com.portal.visitorportal.model.user.RegisterCommandDTO
 import com.portal.visitorportal.model.user.ApplicationUserDTO
+import com.portal.visitorportal.model.user.RegisterCommandDTO
 import com.portal.visitorportal.repository.user.UserRepository
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl(
+open class UserServiceImpl(
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder
 ): UserService {
@@ -33,6 +33,6 @@ class UserServiceImpl(
             lastName = registerCommandDTO.lastName
         )
 
-        return applicationUser;
+        return applicationUser
     }
 }
