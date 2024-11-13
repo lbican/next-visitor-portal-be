@@ -16,13 +16,11 @@ data class ApplicationUser(
     val lastName: String,
     @CreatedDate val createdAt: LocalDateTime,
     @LastModifiedDate val updatedAt: LocalDateTime,
-
     val profilePicture: String?,
     val website: String?,
     val bio: String?,
     val location: String?,
     val phoneNumber: String?,
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",

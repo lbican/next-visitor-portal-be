@@ -17,7 +17,10 @@ class UserController(private val userService: UserService) {
     }
 
     @PutMapping("/{username}")
-    fun updateUser(@PathVariable username: String, @Valid @RequestBody updateApplicationUserCommandDTO: UpdateApplicationUserCommandDTO): ApplicationUserDTO {
+    fun updateUser(
+        @PathVariable username: String,
+        @Valid @RequestBody updateApplicationUserCommandDTO: UpdateApplicationUserCommandDTO,
+    ): ApplicationUserDTO {
         return userService.updateUser(username, updateApplicationUserCommandDTO)
     }
 

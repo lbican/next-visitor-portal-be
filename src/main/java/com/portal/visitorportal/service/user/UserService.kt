@@ -9,7 +9,10 @@ interface UserService {
     @PreAuthorize("#username == authentication.name")
     fun fetchUser(username: String): ApplicationUserDTO
 
-    fun updateUser(username: String, updateApplicationUserCommandDTO: UpdateApplicationUserCommandDTO): ApplicationUserDTO
+    fun updateUser(
+        username: String,
+        updateApplicationUserCommandDTO: UpdateApplicationUserCommandDTO,
+    ): ApplicationUserDTO
 
     fun registerUser(registerCommandDTO: RegisterCommandDTO): ApplicationUserDTO
 }

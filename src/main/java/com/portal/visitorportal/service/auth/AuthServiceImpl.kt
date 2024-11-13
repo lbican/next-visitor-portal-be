@@ -6,12 +6,12 @@ import com.portal.visitorportal.repository.auth.JwtTokenRefreshRepository
 import com.portal.visitorportal.security.jwt.JwtProperties
 import com.portal.visitorportal.security.jwt.JwtTokenService
 import com.portal.visitorportal.service.session.SessionService
+import java.util.Date
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
-import java.util.Date
 
 @Service
 class AuthServiceImpl(
@@ -20,7 +20,7 @@ class AuthServiceImpl(
     private val jwtTokenService: JwtTokenService,
     private val jwtProperties: JwtProperties,
     private val refreshTokenRepository: JwtTokenRefreshRepository,
-    private val sessionService: SessionService
+    private val sessionService: SessionService,
 ) : AuthService {
     override fun authenticate(authRequestDTO: AuthRequestDTO): AuthResponseDTO {
         authenticationManager.authenticate(

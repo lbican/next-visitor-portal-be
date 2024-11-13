@@ -11,5 +11,5 @@ data class UpdateApplicationUserCommandDTO(
     val profilePicture: String?,
     val website: String?,
     val location: String?,
-    val phoneNumber: String?
+    val phoneNumber: String?,
 )
