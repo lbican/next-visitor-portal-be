@@ -5,12 +5,13 @@ import com.portal.visitorportal.model.auth.AuthResponseDTO
 import com.portal.visitorportal.repository.auth.JwtTokenRefreshRepository
 import com.portal.visitorportal.security.jwt.JwtProperties
 import com.portal.visitorportal.security.jwt.JwtTokenService
-import java.util.*
+import com.portal.visitorportal.service.session.SessionService
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
+import java.util.Date
 
 @Service
 class AuthServiceImpl(
@@ -19,16 +20,20 @@ class AuthServiceImpl(
     private val jwtTokenService: JwtTokenService,
     private val jwtProperties: JwtProperties,
     private val refreshTokenRepository: JwtTokenRefreshRepository,
+    private val sessionService: SessionService
 ) : AuthService {
     override fun authenticate(authRequestDTO: AuthRequestDTO): AuthResponseDTO {
         authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(authRequestDTO.username, authRequestDTO.password)
         )
-        val user = userDetailsService.loadUserByUsername(authRequestDTO.username)
-        val accessToken = createAccessToken(user)
-        val refreshToken = createRefreshToken(user)
 
-        refreshTokenRepository.save(refreshToken, user)
+        val securityUser = userDetailsService.loadUserByUsername(authRequestDTO.username)
+
+        val accessToken = createAccessToken(securityUser)
+        val refreshToken = createRefreshToken(securityUser)
+        refreshTokenRepository.save(refreshToken, securityUser)
+
+        sessionService.logUserSession(authRequestDTO.username, accessToken)
 
         return AuthResponseDTO(accessToken = accessToken, refreshToken = refreshToken)
     }

@@ -11,4 +11,9 @@ data class ApplicationUserDTO(
     val updatedAt: LocalDateTime,
     val createdAt: LocalDateTime,
     val roles: List<String>,
+    val profilePicture: String?,
+    val website: String?,
+    val bio: String?,
+    val location: String?,
+    val phoneNumber: String?,
 )

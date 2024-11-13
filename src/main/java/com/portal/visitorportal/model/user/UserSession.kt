@@ -12,9 +12,9 @@ data class UserSession(
     @JoinColumn(name = "user_id")
     val applicationUser: ApplicationUser,
     val sessionToken: String,
-    @CreatedDate val createdAt: LocalDateTime,
     val expiresAt: LocalDateTime,
     val lastAccessed: LocalDateTime,
+    @CreatedDate val createdAt: LocalDateTime,
 ) {
     constructor() :
         this(

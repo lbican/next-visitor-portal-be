@@ -16,6 +16,13 @@ data class ApplicationUser(
     val lastName: String,
     @CreatedDate val createdAt: LocalDateTime,
     @LastModifiedDate val updatedAt: LocalDateTime,
+
+    val profilePicture: String?,
+    val website: String?,
+    val bio: String?,
+    val location: String?,
+    val phoneNumber: String?,
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",
@@ -35,6 +42,11 @@ data class ApplicationUser(
             lastName = "",
             createdAt = LocalDateTime.now(),
             updatedAt = LocalDateTime.now(),
+            profilePicture = "",
+            website = "",
+            bio = "",
+            location = "",
+            phoneNumber = "",
             roles = emptyList(),
         )
 
@@ -51,6 +63,11 @@ data class ApplicationUser(
         password = passwordHash,
         firstName = firstName,
         lastName = lastName,
+        profilePicture = "",
+        website = "",
+        bio = "",
+        location = "",
+        phoneNumber = "",
         createdAt = LocalDateTime.now(),
         updatedAt = LocalDateTime.now(),
         roles = emptyList(),
@@ -66,6 +83,11 @@ data class ApplicationUser(
             updatedAt = updatedAt,
             createdAt = createdAt,
             roles = roles.map { it.roleName },
+            profilePicture = profilePicture,
+            website = website,
+            bio = bio,
+            location = location,
+            phoneNumber = phoneNumber,
         )
     }
 }
