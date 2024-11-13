@@ -1,6 +1,6 @@
-package com.portal.visitorportal.repository.user
+package com.portal.visitorportal.user
 
-import com.portal.visitorportal.model.user.ApplicationUser
+import com.portal.visitorportal.user.model.ApplicationUser
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

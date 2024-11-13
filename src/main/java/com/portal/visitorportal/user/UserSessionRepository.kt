@@ -1,6 +1,6 @@
-package com.portal.visitorportal.repository.user
+package com.portal.visitorportal.user
 
-import com.portal.visitorportal.model.user.UserSession
+import com.portal.visitorportal.user.model.UserSession
 import org.springframework.data.repository.CrudRepository
 
 interface UserSessionRepository : CrudRepository<UserSession, Long>

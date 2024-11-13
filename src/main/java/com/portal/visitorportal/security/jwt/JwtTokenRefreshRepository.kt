@@ -1,4 +1,4 @@
-package com.portal.visitorportal.repository.auth
+package com.portal.visitorportal.security.jwt
 
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component

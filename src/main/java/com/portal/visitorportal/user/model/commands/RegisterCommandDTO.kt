@@ -1,4 +1,4 @@
-package com.portal.visitorportal.model.user.commands
+package com.portal.visitorportal.user.model.commands
 
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank

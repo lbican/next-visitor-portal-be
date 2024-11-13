@@ -1,9 +1,8 @@
-package com.portal.visitorportal.controllers.user
+package com.portal.visitorportal.user.model
 
-import com.portal.visitorportal.model.user.ApplicationUserDTO
-import com.portal.visitorportal.model.user.commands.RegisterCommandDTO
-import com.portal.visitorportal.model.user.commands.UpdateApplicationUserCommandDTO
-import com.portal.visitorportal.service.user.UserService
+import com.portal.visitorportal.user.model.commands.RegisterCommandDTO
+import com.portal.visitorportal.user.model.commands.UpdateApplicationUserCommandDTO
+import com.portal.visitorportal.user.UserService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 

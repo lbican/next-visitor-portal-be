@@ -1,8 +1,8 @@
-package com.portal.visitorportal.service.user
+package com.portal.visitorportal.user
 
-import com.portal.visitorportal.model.user.ApplicationUserDTO
-import com.portal.visitorportal.model.user.commands.RegisterCommandDTO
-import com.portal.visitorportal.model.user.commands.UpdateApplicationUserCommandDTO
+import com.portal.visitorportal.user.model.ApplicationUserDTO
+import com.portal.visitorportal.user.model.commands.RegisterCommandDTO
+import com.portal.visitorportal.user.model.commands.UpdateApplicationUserCommandDTO
 import org.springframework.security.access.prepost.PreAuthorize
 
 interface UserService {

@@ -1,4 +1,4 @@
-package com.portal.visitorportal.model.auth
+package com.portal.visitorportal.security.model
 
 import jakarta.validation.constraints.NotBlank
 

@@ -1,8 +1,8 @@
 package com.portal.visitorportal.security.config
 
-import com.portal.visitorportal.repository.user.UserRepository
+import com.portal.visitorportal.user.UserRepository
 import com.portal.visitorportal.security.jwt.JwtProperties
-import com.portal.visitorportal.service.auth.UserDetailsServiceImpl
+import com.portal.visitorportal.security.AuthUserDetailsServiceImpl
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -20,7 +20,7 @@ open class SecurityAuthConfiguration {
 
     @Bean
     open fun userDetailsService(userRepository: UserRepository): UserDetailsService =
-        UserDetailsServiceImpl(userRepository)
+        AuthUserDetailsServiceImpl(userRepository)
 
     @Bean open fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 

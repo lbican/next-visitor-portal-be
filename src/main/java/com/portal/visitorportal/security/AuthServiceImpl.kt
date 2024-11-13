@@ -1,11 +1,11 @@
-package com.portal.visitorportal.service.auth
+package com.portal.visitorportal.security
 
-import com.portal.visitorportal.model.auth.AuthRequestDTO
-import com.portal.visitorportal.model.auth.AuthResponseDTO
-import com.portal.visitorportal.repository.auth.JwtTokenRefreshRepository
+import com.portal.visitorportal.security.model.AuthRequestDTO
+import com.portal.visitorportal.security.model.AuthResponseDTO
 import com.portal.visitorportal.security.jwt.JwtProperties
+import com.portal.visitorportal.security.jwt.JwtTokenRefreshRepository
 import com.portal.visitorportal.security.jwt.JwtTokenService
-import com.portal.visitorportal.service.session.SessionService
+import com.portal.visitorportal.user.UserSessionService
 import java.util.Date
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -20,7 +20,7 @@ class AuthServiceImpl(
     private val jwtTokenService: JwtTokenService,
     private val jwtProperties: JwtProperties,
     private val refreshTokenRepository: JwtTokenRefreshRepository,
-    private val sessionService: SessionService,
+    private val sessionService: UserSessionService,
 ) : AuthService {
     override fun authenticate(authRequestDTO: AuthRequestDTO): AuthResponseDTO {
         authenticationManager.authenticate(

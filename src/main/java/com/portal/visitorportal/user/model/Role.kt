@@ -1,4 +1,4 @@
-package com.portal.visitorportal.model.user
+package com.portal.visitorportal.user.model
 
 import jakarta.persistence.*
 import lombok.AllArgsConstructor

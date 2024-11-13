@@ -1,10 +1,9 @@
-package com.portal.visitorportal.controllers.auth
+package com.portal.visitorportal.security
 
-import com.portal.visitorportal.model.auth.AuthRequestDTO
-import com.portal.visitorportal.model.auth.AuthResponseDTO
-import com.portal.visitorportal.model.auth.JwtTokenRefreshRequestDTO
-import com.portal.visitorportal.model.auth.JwtTokenResponseDTO
-import com.portal.visitorportal.service.auth.AuthService
+import com.portal.visitorportal.security.model.AuthRequestDTO
+import com.portal.visitorportal.security.model.AuthResponseDTO
+import com.portal.visitorportal.security.jwt.JwtTokenRefreshRequestDTO
+import com.portal.visitorportal.security.jwt.JwtTokenResponseDTO
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
