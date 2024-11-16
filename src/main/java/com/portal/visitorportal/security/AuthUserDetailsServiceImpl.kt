@@ -1,7 +1,7 @@
 package com.portal.visitorportal.security
 
-import com.portal.visitorportal.user.model.ApplicationUser
 import com.portal.visitorportal.user.UserRepository
+import com.portal.visitorportal.user.model.ApplicationUser
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService

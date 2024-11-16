@@ -1,8 +1,8 @@
 package com.portal.visitorportal.security.config
 
-import com.portal.visitorportal.user.UserRepository
-import com.portal.visitorportal.security.jwt.JwtProperties
 import com.portal.visitorportal.security.AuthUserDetailsServiceImpl
+import com.portal.visitorportal.security.jwt.JwtProperties
+import com.portal.visitorportal.user.UserRepository
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

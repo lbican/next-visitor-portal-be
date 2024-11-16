@@ -28,7 +28,7 @@ data class ApplicationUser(
         joinColumns = [JoinColumn(name = "user_id")],
         inverseJoinColumns = [JoinColumn(name = "role_id")],
     )
-    val roles: List<Role>,
+    val roles: List<UserRole>,
 ) {
     constructor() :
         this(

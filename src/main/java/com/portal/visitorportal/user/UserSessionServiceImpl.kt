@@ -1,7 +1,7 @@
 package com.portal.visitorportal.user
 
-import com.portal.visitorportal.user.model.UserSession
 import com.portal.visitorportal.security.jwt.JwtProperties
+import com.portal.visitorportal.user.model.UserSession
 import java.time.LocalDateTime
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration

@@ -1,9 +1,10 @@
-package com.portal.visitorportal.user.model
+package com.portal.visitorportal.user
 
+import com.portal.visitorportal.user.model.ApplicationUserDTO
 import com.portal.visitorportal.user.model.commands.RegisterCommandDTO
 import com.portal.visitorportal.user.model.commands.UpdateApplicationUserCommandDTO
-import com.portal.visitorportal.user.UserService
 import jakarta.validation.Valid
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -21,6 +22,16 @@ class UserController(private val userService: UserService) {
         @Valid @RequestBody updateApplicationUserCommandDTO: UpdateApplicationUserCommandDTO,
     ): ApplicationUserDTO {
         return userService.updateUser(username, updateApplicationUserCommandDTO)
+    }
+
+    @PutMapping("/{username}/role", consumes = [MediaType.TEXT_PLAIN_VALUE])
+    fun updateRole(@PathVariable username: String, @RequestBody roleName: String): ApplicationUserDTO {
+        return userService.assignRoleToUser(username, roleName)
+    }
+
+    @DeleteMapping("/{username}")
+    fun deleteUser(@PathVariable username: String) {
+        userService.deleteUser(username)
     }
 
     @PostMapping("/register")
